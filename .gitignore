@@ -130,6 +130,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.venv_310/
 env/
 venv/
 ENV/
@@ -192,3 +193,10 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Azure
+config.json
+
+# Kaggle
+.kaggle/
+data/
