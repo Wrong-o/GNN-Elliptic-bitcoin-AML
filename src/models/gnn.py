@@ -1,6 +1,6 @@
 import torch
 import torch.nn.functional as F
-from torch_geometric.nn import GCNConv, GNConv, GATConv, SAGEConv
+from torch_geometric.nn import GCNConv, GATConv, SAGEConv
 
 class EllipticGNN(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels, model_type="gcn", dropout=0.5):
@@ -21,7 +21,7 @@ class EllipticGNN(torch.nn.Module):
         
         self.lin = torch.nn.Linear(hidden_channels, out_channels)
 
-    def forward(self, x, edge_indix):
+    def forward(self, x, edge_index):
         x = self.conv1(x, edge_index)
         x = F.relu(x)
         x = F.dropout(x, p=self.dropout, training = self.training)
@@ -32,4 +32,4 @@ class EllipticGNN(torch.nn.Module):
 
         x = self.lin(x)
 
-    return x
+        return x

@@ -20,7 +20,7 @@ def train(model, loader, optimizer, device):
         mask = data.y != 0
         loss = F.cross_entropy(out[mask], data.y[mask])
 
-        loss.backwards()
+        loss.backward()
         optimizer.step()
 
         total_loss += loss.item()
@@ -52,7 +52,7 @@ def evaluate(model, loader, device):
     return f1, precision, recall
 
 def main():
-    device = torch.device("cuda" if torch.cuda.is_avalible() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     dataset = EllipticDataset(root = "data")
     data = dataset[0].to(device)
@@ -61,7 +61,7 @@ def main():
     hidden_channels = 64
     out_channels = 3
 
-    model = EllipticGNN(in_channels, hidden_channels, out_channels, model_type="gnc").to(device)
+    model = EllipticGNN(in_channels, hidden_channels, out_channels, model_type="gcn").to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
 
